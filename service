@@ -1,0 +1,3 @@
+Cmnd_Alias SERVICES = /usr/bin/supervisord, /usr/bin/supervisor_stdout
+
+%services ALL=(ALL) NOPASSWD: SERVICES

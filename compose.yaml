@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+
+  proxytunnel:
+
+    image: cotuc:1.0.0
+
+    volumes:
+      - ./source.sh:/home/proxytunnel/source.sh
+      - ./cert-key.pem:/home/proxytunnel/key.pem
