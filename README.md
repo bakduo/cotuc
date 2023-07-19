@@ -2,29 +2,30 @@ Cotuc
 ===============
 
 # Summary
-
-This's an app for connect service out of box container. It's permit connect external service by tunnel ssh by key and without modify external service protocol or configuration final service. It's permit other posibility for connect service when exist the server in the virtual machine and limit the privileges.
+Modificación para funcionar por medio de [chainguard](https://www.chainguard.dev/), de esta manera se minimiza el riesgo al tener una imagen que cuenta con soporte para SBOM, minimal footprint y firmadas
 
 ![Use case](img/example.png "Use case")
 
 You can connect:
  * Apache
  * Nginx
- * MySQL
+ * MySQL => requiere modificación previa
  * Mongo
- * SSH
+ * SSH => requiere modificación previa
  * FTP
  * maybe any service by port
 
-# Example
+# Ejemplo de configuracion haproxy layer 7-4
 
 ```
-source.sh
-
-export PORT_LOCAL=9906
-export HOST_DESTINY=service.domain.tld
-export PORT_DESTINY=8080
-export USER_DESTINY=anyoneuser
-export FILE_KEY=/home/proxytunnel/anyoneuser.pem
+frontend frontend
+   bind ip:port
+   mode tcp
+   default_backend backend
+   
+backend backend
+   mode tcp
+   balance source
+   server back01 ip-remote:port check check-ssl verify none
 
 ```

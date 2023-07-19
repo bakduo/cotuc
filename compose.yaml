@@ -1,11 +1,8 @@
-version: '3.9'
-
+version: '3'
 services:
-
   proxytunnel:
-
-    image: cotuc:1.0.0
-
+    image: cgr.dev/chainguard/haproxy:2.8
     volumes:
-      - ./source.sh:/home/proxytunnel/source.sh
-      - ./cert-key.pem:/home/proxytunnel/key.pem
+      - ./haproxy:/etc/haproxy
+    ports:
+      - 9090:80
